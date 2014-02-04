@@ -1,0 +1,106 @@
+<!doctype html>
+{% load staticfiles %}
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="">
+
+		<meta property="og:site_name" content="Sunlight Academy">
+		{% block og %}
+	        <meta property="og:title" content="Sunlight Academy">
+	        <meta property="og:description" content="">
+	        <meta property="og:url" content="http://training.sunlightfoundation.com/">
+        {% endblock %}
+        <meta property="og:type" content="website">
+        <meta property="og:email" content="training@sunlightfoundation.com">
+        <meta property="og:image" content="http://s3.amazonaws.com/sunlight-assets/site/4.0/images/opengraph-superhero.jpg">
+		<meta property="fb:page_id" content="6921874941">
+	    <meta property="og:locale" content="en_US">
+
+		<title>{% block title %}Sunlight Academy{% endblock %}</title>
+
+		<link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+		<link rel="stylesheet" href="{% static "css/sunlightacademy.css" %}">
+
+		<style>
+			form ul { list-style: none; }
+			form > ul > li { margin: 0.3em 0; }
+			form ul.errorlist { color: #933; margin: 0; padding: 0; }
+			form label { font-weight: bold; }
+			.messages ul { list-style: none; margin: 0; padding: 0; }
+			.delete-account { text-align: center; }
+		</style>
+	</head>
+	<body class="{% block bodyclass %}internal{% endblock %}">
+		<div class="sf-mini-header">
+        	<div class="nav">
+        		<a class="sf-logo" href="http://www.sunlightfoundation.com">Sunlight Foundation</a>
+        		<ul>
+        			<li><a href="http://sunlightfoundation.com/about/">About</a></li>
+        			<li><a href="http://sunlightfoundation.com/blog/">Blog</a></li>
+        			<li><a href="http://sunlightfoundation.com/projects/">Projects</a></li>
+        			<li><a href="http://sunlightfoundation.com/contact/">Contact</a></li>
+        		</ul>
+        	</div>
+        </div>
+		<div class="container">
+			<div id="main-header" class="clearfix">
+				<h1><a href="/">Sunlight Academy</a></h1>
+				{% block header-nav %}
+					<div class="nav">
+		                <ul class="account">
+		                	{% if request.user.is_authenticated %}
+								<li><a href="/account/logout/" class="btn btn-inverse">Logout</a></li>
+								<li class="last"><a href="/account/" class="btn btn-inverse"><i class="icon-white icon-user"></i> Account Settings</a></li>
+								{% if request.user.is_staff %}
+									<li><a href="/admin/" class="btn btn-inverse"><i class="icon-cog icon-white"></i> Admin</a></li>
+								{% endif %}
+							{% else %}
+		                    	<li class="last"><a href="/account/login/" class="btn btn-inverse">Log In</a></li>
+							{% endif %}
+		                </ul>
+		                <ul class="social">
+		                    <li class="youtube"><a href="#">YouTube</a></li>
+		                    <li class="twitter"><a href="#">Twitter</a></li>
+		                    <li class="facebook"><a href="#">Facebook</a></li>
+		                </ul>
+		            </div>
+	            {% endblock %}
+			</div>
+			{% if messages %}
+				<div class="messages">
+					<ul>
+						{% for message in messages %}
+							<li class="alert alert-success">{{ message }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
+			{% block container %}{% endblock %}
+			<div class="footer row">
+				<div class="span6 signup">
+					<h4>Like this Project and Want to Discover Others Like It?</h4>
+		            <form action="/subscribe/" method="post" id="subscribe">
+		            	<span class="tip">Join the Sunlight Foundation's open government community to learn more.</span>
+		            	{% csrf_token %}
+		            	<ul>
+		                	<li><input type="text" name="email" placeholder="your email address"></li>
+		                	<li><input type="text" name="zipcode" placeholder="your zip code"></li>
+		                	<li><button type="submit" class="btn btn-inverse"><i class="icon-envelope icon-white"></i> Sign Up</button></li>
+		                </ul>
+		            </form>
+		            <div class="subscribe-thanks"><p></p></div>
+				</div>
+				<div class="span5 terms">
+					<p>Our <a href="http://sunlightfoundation.com/legal/privacy/">privacy policy</a> details how personally identifiable information that is collected on our web sites is handled. Read our <a href="http://sunlightfoundation.com/legal/terms/">terms of service</a>.</p>
+		            <p>This work by <a href="http://sunlightfoundation.com">Sunlight Foundation</a>, unless <a href="http://sunlightfoundation.com/colophon/">otherwise noted</a>, is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.</p>
+				</div>
+			</div>
+		</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	    <script src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=sunlightfoundation"></script>
+	    <script src="{% static "js/jquery-1.7.1.min.js" %}"></script>
+	    <script src="{% static "js/theacademy.js" %}"></script>
+		{% block js %}{% endblock %}
+	</body>
+</html>

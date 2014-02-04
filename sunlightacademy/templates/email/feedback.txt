@@ -1,0 +1,23 @@
+{% with user.get_profile as profile %}
+Feedback on "{{ feedback.module.title }}"
+
+User: {{ feedback.user.first_name }} {{ feedback.user.last_name }} ({{ feedback.user.username }})
+Email: {{ feedback.user.email }}
+{% if profile %}Organization: {{ profile.organization }}{% endif %}
+
+*** Values range from 0 (low) to 4 (high) ***
+
+Knowledge before: {{ feedback.knowledge_before }}
+Knowledge after: {{ feedback.knowledge_after }}
+Content clarity: {{ feedback.content_clarity }}
+
+Suggestions:
+
+{{ feedback.suggestions }}
+
+Liked about this tutorial:
+
+{{ feedback.positives }}
+
+Would recommend to others: {% if feedback.would_recommend == 'y' %}yes{% else %}no{% endif %}
+{% endwith %}

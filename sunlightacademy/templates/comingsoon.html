@@ -1,0 +1,72 @@
+{% extends "base-full.html" %}
+{% load staticfiles %}
+
+{% block title %}Sunlight Academy Coming Soon!{% endblock %}
+
+{% block css %}
+	{{ block.super }}
+	<style>
+		.other-projects-container { margin-top: 4em; }
+		.other-projects { list-style: none; margin: 0; padding: 0; }
+		.other-projects li { clear: both; margin: 0 0 4em 0; padding: 0; height: 120px; }
+		.other-projects img { float: left; margin-right: 2em; width: 60px; }
+		.other-projects a h4 { color: #C9A706; margin-bottom: 0.3em; }
+		.other-projects p { margin: 0 20px 0 85px; }
+	</style>
+{% endblock %}
+
+{% block content %}
+
+	<h3>Thank you for signing up!</h3>
+	<p>We will send you an email notification when the training portal is live.</p>
+	<p>Until then, check out some of Sunlight's other great tools.</p>
+
+	<div class="row other-projects-container">
+
+		<div class="span4">
+			<ul class="other-projects">
+				<li>
+					<a href="http://scout.sunlightfoundation.com"><img src="{% static "img/projects/scout.png" %}"></a>
+					<a href="http://scout.sunlightfoundation.com"><h4>Scout</h4></a>
+					<p>Scout is a rapid notification service allows anyone to create customized email or text alerts on actions Congress takes on an issue or a specific bill.</p>
+				</li>
+				<li>
+					<a href="http://politicalpartytime.org"><img src="{% static "img/projects/partytime.png" %}"></a>
+					<a href="http://politicalpartytime.org"><h4>Party Time</h4></a>
+					<p>Party Time documents the Congressional Fundraising Circuit.</p>
+				</li>
+			</ul>
+		</div>
+
+		<div class="span4">
+
+			<ul class="other-projects">
+				<li>
+					<a href="http://influenceexplorer.com"><img src="{% static "img/projects/ie.png" %}"></a>
+					<a href="http://influenceexplorer.com"><h4>Influence Explorer</h4></a>
+					<p>Influence Explorer connects the dots of political contributions on the federal and state level.</p>
+				</li>
+				<li>
+					<a href="http://openstates.org"><img src="{% static "img/projects/openstates.png" %}"></a>
+					<a href="http://openstates.org"><h4>Open States</h4></a>
+					<p>Open States aggregates legislative data directly from state legislatures.</p>
+				</li>
+			</ul>
+
+		</div>
+
+		<div class="span4">
+
+			<ul class="other-projects">
+				<li>
+					<a href="http://politiwidgets.com"><img src="{% static "img/projects/politiwidgets.png" %}"></a>
+					<a href="http://politiwidgets.com"><h4>Politiwidgets</h4></a>
+					<p>Politiwidgets makes inserting information on a Member of Congress into a blog post as easy as embedding a YouTube video.</p>
+				</li>
+			</ul>
+
+		</div>
+
+	</div>
+
+{% endblock %}

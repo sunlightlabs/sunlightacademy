@@ -1,0 +1,16 @@
+{% extends "base-full.html" %}
+
+{% block title %}Delete Account - Sunlight Academy{% endblock %}
+
+{% block content %}
+	<h2>Delete your account</h2>
+
+	<p>Last chance. If you click the button below, your account and all associated data will be <strong>permanently deleted</strong>. Click wisely.</p>
+
+	<form action="/account/delete/" method="post">
+		{% csrf_token %}
+		<input type="hidden" name="iamreallysure" value="iknowwhatiamdoing">
+		<input type="submit" value="Permanently Delete Account" class="btn btn-danger">
+	</form>
+
+{% endblock %}

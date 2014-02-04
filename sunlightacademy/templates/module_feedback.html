@@ -1,0 +1,114 @@
+{% extends "base-sidebar.html" %}
+{% load markup %}
+{% load staticfiles %}
+
+{% block og %}
+    <meta property="og:title" content="{{ module.title }}">
+    <meta property="og:description" content="{{ module.description|markdown|striptags }}">
+    <meta property="og:url" content="http://training.sunlightfoundation.com{% url 'training_module' module.slug %}">
+{% endblock %}
+
+{% block title %}{{ module.title }} from Sunlight Academy{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <style>
+        textarea#id_suggestions,
+        textarea#id_positives { width: 400px; }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    {% if not module.is_public %}
+        <div class="alert">
+            <b>This module is not published. You can make it public in the <a href="http://training.sunlightfoundation.com/admin/training/module/{{ module.pk }}/">module admin</a>.</b>
+        </div>
+    {% endif %}
+
+    <div class="module">
+        <h2 class="withTip">Feedback on <i>{{ module.title }}</i></h2>
+        <p class="tip">Your feedback is appreciated and will help us improve future training. All fields are required.</p>
+    </div>
+
+    <div class="module-contents">
+        <form action="." method="post" class="form-vertical">
+            {% csrf_token %}
+            {{ form.user.as_hidden }}
+            {{ form.module.as_hidden }}
+            <ul>
+                <li>
+                    <label for="id_knowledge_before">How would you rate your knowledge on the subject <em>before</em> taking this course?</label>
+                    {{ form.knowledge_before.errors }}
+                    {{ form.knowledge_before }}
+                </li>
+                <li>
+                    <label for="id_knowledge_after">How would you rate your knowledge on the subject <em>after</em> taking this course?</label>
+                    {{ form.knowledge_after.errors }}
+                    {{ form.knowledge_after }}
+                </li>
+                <li>
+                    <label for="id_content_clarity">How clear and easy to understand was the course content?</label>
+                    {{ form.content_clarity.errors }}
+                    {{ form.content_clarity }}
+                </li>
+                <li>
+                    <label for="id_suggestions">Are there areas of the course that need further explanation or improvement?</label>
+                    {{ form.suggestions.errors }}
+                    {{ form.suggestions }}
+                </li>
+                <li>
+                    <label for="id_positives">What did you like most or find most informative about this tutorial?</label>
+                    {{ form.positives.errors }}
+                    {{ form.positives }}
+                </li>
+
+                <li>
+                    <label for="id_would_recommend">Would you recommend this module to others?</label>
+                    {{ form.would_recommend.errors }}
+                    {{ form.would_recommend }}
+                </li>
+            </ul>
+            <input type="submit" class="btn btn-sunlight">
+        </form>
+    </div>
+
+    <div id="fb-root"></div>
+
+{% endblock %}
+
+{% block sidebar %}
+
+    <div class="module">
+        <figure>
+            {% if module.thumbnail %}
+                <img src="{{ module.thumbnail.url }}">
+            {% else %}
+                <img src="{% static "img/testVideo.jpg" %}">
+            {% endif %}
+        </figure>
+        <div class="well">
+            {{ module.description }}
+        </div>
+    </div>
+
+    {% comment %}
+    <div class="module">
+        <h3>Related Modules</h3>
+        <ul class="unstyled categories">
+            {% for mod in module.related_modules %}
+                <li><a href="">{{ mod }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="module">
+    <h3>Browse Categories</h3>
+        <ul class="unstyled categories">
+            {% for cat in categories %}
+                <li><a href="{% url 'training_category' cat.slug %}">{{ cat.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endcomment %}
+
+{% endblock %}

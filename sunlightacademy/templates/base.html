@@ -1,0 +1,81 @@
+{% extends "sfapp/base.html" %}
+{% load staticfiles %}
+
+{% block og %}
+    <meta property="og:title" content="{{ module.title }}">
+    <meta property="og:description" content="Sunlight Foundation's interactive portal for journalists, activists, researchers and students to explore our tools and develop skill sets to unlock government data.">
+    <meta property="og:url" content="http://training.sunlightfoundation.com/">
+{% endblock %}
+
+{% block ga %}UA-22821126-23{% endblock %}
+
+{% block bodyclass %}internal{% endblock %}
+
+{% block head %}
+	<link rel="shortcut icon" href="http://sunlight-assets.s3.amazonaws.com/academy/favicon.ico">
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/sunlightacademy.css" %}">
+    <style>
+    	.doormat {
+    		background-color: #fafaf7;
+    		border: 1px solid #ECE9E9;
+    		box-shadow: 0 0 2px #d9d9d9;
+    		color: #666;
+    		font-size: 110%;
+    		margin-bottom: 4em;
+    		text-align: center;
+    		padding: 1em 0;
+    		width: 100%;
+    	}
+   	</style>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static "js/theacademy.js" %}"></script>
+    <script src="https://s3.amazonaws.com/assets.sunlightfoundation.com/social/scripts/simple-socialite-pack.min.js" async></script>
+{% endblock %}
+
+{% block container %}
+    <div id="main-header" class="clearfix">
+        {% block header-nav %}
+            <div class="nav">
+                <ul class="account listNav unstyled">
+                    {% if request.user.is_authenticated %}
+                        <li><a href="/account/logout/">Logout</a></li>
+
+                        <li><a href="/about/">About</a></li>
+                        <li><a href="/events/">Training Events</a></li>
+                        <li {% if not request.user.is_staff %}class="first"{% endif %}><a href="/account/"><i class="icon-white icon-user"></i> Account Settings</a></li>
+                        {% if request.user.is_staff %}
+                            <li class="first"><a href="/admin/"><i class="icon-cog icon-white"></i> Admin</a></li>
+                        {% endif %}
+                    {% else %}
+                        <li class="first"><a href="/account/login/">Log In</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endblock %}
+        <h1><a href="/">Sunlight Academy</a></h1>
+    </div>
+
+    {% if messages %}
+        <div class="messages">
+            <ul>
+                {% for message in messages %}
+                    <li class="alert alert-success">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if request.show_doormat %}
+		<div class="doormat">
+			We need your feedback to make Sunlight Academy better! <a href="https://www.surveymonkey.com/s/SunlightAcademy">Take this quick survey.</a>
+		</div>
+	{% endif %}
+
+    <div id="fb-root"></div>
+
+{% endblock %}

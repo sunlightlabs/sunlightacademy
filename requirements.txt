@@ -1,0 +1,20 @@
+Django==1.6.1
+Markdown==2.3.1
+Pillow==2.2.1
+South==0.8.4
+boto==2.17.0
+dj-database-url==0.2.2
+django-debug-toolbar==1.0.1
+django-markup-deprecated==0.0.3
+django-registration==1.0
+django-social-auth==0.7.28
+django-storages==1.1.8
+gunicorn==18.0
+httplib2==0.8
+oauth2==1.5.211
+psycopg2==2.5.1
+python-openid==2.2.5
+-e git://github.com/themartorana/python-postmark.git@1c2838642218409675316ef44c1c02e1a70fe55f#egg=python_postmark-master
+-e git://github.com/sunlightlabs/sfapp.git@469588b1457f2758e1fd3a191f9d3c867cbe265b#egg=sfapp-dev
+sqlparse==0.1.10
+unicodecsv==0.9.4

@@ -1,0 +1,50 @@
+{% extends "base-full.html" %}
+{% load staticfiles %}
+
+{% block title %}{{ category.name }} - Sunlight Academy{% endblock %}
+
+{% block content %}
+    <div class="module">
+	    <h2>Training Modules: {{ category.name }}</h2>
+	    <ul class="trainings unstyled clearfix">
+	    	{% for module in modules %}
+				<li>
+					{% if module.pk in completed_ids %}
+						<span class="status accomplished">Accomplished</span>
+					{% else %}
+						<span class="status">Watch</span>
+					{% endif %}
+		            <a href="{% url 'training_module' module.slug %}">
+						{% if module.thumbnail %}
+		            		<img src="{{ module.thumbnail.url }}">
+		            	{% else %}
+		            		<img src="{% static "img/testVideo.jpg" %}">
+		            	{% endif %}
+		            </a>
+		            <div class="description">
+		                <div class="clearfix"></div>
+		                <h4 title="Legislative Data" class="withTip"><a href="{% url 'training_module' module.slug %}">{{ module.title }}</a></h4>
+		                {% if module.date %}
+		                	<span class="datetime">{{ module.date.date }}</span>
+		                {% endif %}
+		                <p class="tip">{{ module.description }}</p>
+		                {% with module.categories.all as cats %}
+		                	{% if cats|length > 1 %}
+			                	<div class="cats">
+			                		<span class="tip cat also">Also in:</span>
+			                		{% for cat in cats %}
+			                			{% if cat != category %}
+				                    		<a class="tip cat" href="{% url 'training_category' cat.slug %}">
+				                    			{{ cat.name }}
+				                    		</a>
+			                    		{% endif %}
+		                			{% endfor %}
+			                	</div>
+			                {% endif %}
+			            {% endwith %}
+		            </div>
+				</li>
+			{% endfor %}
+	    </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base-full.html" %}
+{% load markup %}
+{% load staticfiles %}
+
+{% block title %}Training Events - Sunlight Academy{% endblock %}
+
+{% block content %}
+    <div class="module">
+        <div class="module">
+            <h2 class="withTip">Training Events</h2>
+            <p>Ready to make your Sunlight Academy training experience interactive? Join us for online webinars and in-person events led by Sunlight staff and fellow experts.</p>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <div class="module">
+                    <h4 class="catHeader">Upcoming Sessions</h4>
+                    <table class="calendar table">
+                        {% for training in upcoming reversed %}
+                            <tr>
+                                {% if training.date %}
+                                    <td>
+                                        {{ training.date }}
+                                    </td>
+                                {% endif %}
+                                    <td>
+                                        <h4 class="calendarHeader">
+                                            <a href="{% url 'training_detail' training.slug %}">{{ training.title }}</a>
+                                        </h4>
+                                        {% if training.description %}
+                                            <div class="calendar-description">{{ training.description|markdown }}</div>
+                                        {% endif %}
+                                        <p><a href="{{ training.url }}" class="btn btn-sunlight">Register now</a></p>
+                                    </td>
+                                </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="module">
+                    <h4 class="catHeader">Previous Sessions</h4>
+                    <table class="calendar table">
+                        {% for training in previous %}
+                            <tr>
+                                {% if training.date %}
+                                    <td>
+                                        {{ training.date }}
+                                    </td>
+                                {% endif %}
+                                    <td>
+                                        <h4 class="calendarHeader">
+                                            <a href="{% url 'training_detail' training.slug %}">{{ training.title }}</a>
+                                        </h4>
+                                        <!-- Placeholder link to webinars -->
+                                        {% if training.module %}
+                                        	<p><a href="{% url 'training_module' training.module.slug %}">View Archived Webinar &raquo;</a></p>
+                                        {% endif %}
+                                    </td>
+                            </tr>
+                        {% endfor %}
+                </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

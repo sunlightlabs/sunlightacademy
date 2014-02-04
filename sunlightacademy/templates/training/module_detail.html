@@ -1,0 +1,162 @@
+{% extends "base-sidebar.html" %}
+{% load markup %}
+
+{% block og %}
+    <meta property="og:title" content="{{ module.title }}">
+    <meta property="og:description" content="{{ module.description|markdown|striptags }}">
+    <meta property="og:url" content="http://training.sunlightfoundation.com{% url 'training_module' module.slug %}">
+{% endblock %}
+
+{% block title %}{{ module.title }} from Sunlight Academy{% endblock %}
+
+{% block content %}
+
+    {% if not module.is_public %}
+        <div class="alert">
+            <b>This module is not published. You can make it public in the <a href="http://training.sunlightfoundation.com/admin/training/module/{{ module.pk }}/">module admin</a>.</b>
+        </div>
+    {% endif %}
+
+    <div class="module">
+        <h2 class="withTip">{{ module.title }}</h2>
+        <p class="tip">{{ module.description }}</p>
+    </div>
+
+	<div class="module-content">
+		{{ module.content|markdown }}
+	</div>
+
+    <div class="module-footer">
+        {% with modules.categories.all as tags %}
+            {% if tags %}
+                <ul>
+                    {% for tag in tags %}
+                    <li><a href="{% url 'tagged' tag.slug %}">{{ tag.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        {% if module.notes_url %}
+            <a href="{{ module.notes_url }}" class="notes-dl">Download notes for this module</a>
+        {% endif %}
+
+
+	    {% if request.user.is_authenticated %}
+
+	        <form action="{% url 'training_module_mark' module.slug %}" method="post" id="completed-form">
+	            {% csrf_token %}
+	            {% if module.pk in completed_ids %}
+	                <input type="hidden" name="completed" value="0" class="completed">
+	                <input type="submit" class="btn" value="Mark as incomplete">
+	            {% else %}
+	                <input type="hidden" name="completed" value="1" class="completed">
+	                <input type="submit" class="btn btn-sunlight" value="Mark as completed">
+	            {% endif %}
+	            <p class="viewMore success {% if module.pk not in completed_ids %}hidden{% endif %}">Congratulations! You've completed this module.</p>
+	        </form>
+
+	        <p class="clear"><a href="{% url 'training_module_feedback' module.slug %}">Help improve Sunlight Academy by giving us feedback on <i>{{ module.title }}</i>.</a></p>
+
+	    {% endif %}
+
+    </div>
+
+    {% if request.user.is_authenticated %}
+        <div id="disqus_thread"></div>
+    {% else %}
+        <p>Join in the conversation! <a href="/">Create an account or log in</a> to read comments and reply.</p>
+    {% endif %}
+
+    <div id="fb-root"></div>
+
+{% endblock %}
+
+{% block sidebar %}
+
+    <h3>Share this module with friends and colleagues</h3>
+    <div class="share-buttons module"
+		data-socialite="auto"
+		data-layout="vertical"
+		data-services="linkedin-share,twitter-tweet,facebook-like"
+		data-options="linkBack=http://training.sunlightfoundation.com{% url 'training_module' module.slug %}&amp;width=90&amp;text=Learn%20about%20{{ module.title|urlencode }}%20from%20%23sunlightacademy&amp;showCounts=right"
+		data-facebook-like-options="layout=button_count"
+		data-twitter-tweet-options="via=sunfoundation"></div>
+
+    <div class="module">
+        <h3>Related Modules</h3>
+        <ul class="unstyled categories">
+            {% for mod in module.related_modules %}
+                <li><a href="{% url 'training_module' mod.slug %}">{{ mod }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="module">
+	<h3>Browse Categories</h3>
+        <ul class="unstyled categories">
+           	{% for cat in categories %}
+    	        <li><a href="{% url 'training_category' cat.slug %}">{{ cat.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script>
+
+        $(document).ready(function() {
+
+            var reminderTimeout = 120000;
+
+            var $form = $('#completed-form');
+            var $success = $form.find('.success');
+
+            $form.submit(function(ev) {
+
+                var params = {
+                    'csrfmiddlewaretoken': $form.find('input[name=csrfmiddlewaretoken]').val(),
+                    'completed': $form.find('input[name=completed]').val()
+                }
+
+                $.post("{% url 'training_module_mark' module.slug %}", params)
+                    .success(function(data) {
+                        if (data == '1') {
+                            $form.find('input.completed').val('0');
+                            $form.find('input[type=submit]')
+                                .removeClass('btn-sunlight')
+                                .val('Mark as incomplete');
+                            $success.show();
+                        } else {
+                            $form.find('input.completed').val('1');
+                            $form.find('input[type=submit]')
+                                .addClass('btn-sunlight')
+                                .val('Mark as completed');
+                            $success.hide();
+                        }
+                    });
+
+                ev.preventDefault();
+            });
+
+            // setTimeout(function() {
+            //     $(window).bind('beforeunload', function() {
+            //         if ($form.find('input[name=completed]').val() === '1') {
+            //             return "We notice that you've spent some time on this module. Did you forget to mark this module as completed?";
+            //         }
+            //     });
+            // }, reminderTimeout);
+
+        });
+    </script>
+    <script>
+        var disqus_shortname = 'sunlightacademy';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+{% endblock %}

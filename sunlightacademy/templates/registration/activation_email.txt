@@ -1,0 +1,3 @@
+Thank you for registering with Sunlight Academy.
+
+Please visit http://training.sunlightfoundation.com/account/activate/{{ activation_key }}/ within {{ expiration_days }} days to complete your account creation.

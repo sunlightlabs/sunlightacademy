@@ -1,0 +1,41 @@
+{% extends "base-full.html" %}
+
+{% block content %}
+
+	<div class="row">
+	    <h2>Sign In</h2>
+		<div class="span8">
+			<form action="." method="post" class="form-vertical">
+				{% csrf_token %}
+				<ul class="module">
+					{{ form.as_ul }}
+					<li>
+					    <button type="submit" value="Log In" class="btn btn-sunlight">
+					        <span>Log In</span>
+					    </button>
+					</li>
+				</ul>
+				<p class="tip withTip">Don't have an account yet? <a href="/account/register/">Create a new account</a>.</p>
+				<p class="tip">Having trouble logging in? <a href="/account/password/reset/">Reset your password</a>.</p>
+			</form>
+
+		</div>
+		<div class="span4">
+			<div class="well centerText">
+				<h4 class="withTip">Don't want to remember yet another username and password?</h4>
+				<p class="tip">No worries! Sign in with your existing Twitter or Facebook accounts.</p>
+                <ul>
+                    <li><a class="signinBtn" id="tweetBtn" href="{% url 'socialauth_begin' 'twitter' %}">Twitter</a> or</li>
+					<li><a class="signinBtn" id="fbBtn" href="{% url 'socialauth_begin' 'facebook' %}">Facebook</a></li>
+				</p>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block sidebar %}
+
+
+
+{% endblock %}

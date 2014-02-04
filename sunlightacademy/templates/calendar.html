@@ -1,0 +1,44 @@
+{% extends "base-full.html" %}
+{% load staticfiles %}
+
+{% block title %}{{ category.name }} - Sunlight Academy{% endblock %}
+
+{% block content %}
+    <div class="module">
+        <div class="module">
+	        <h2 class="withTip">Webinars</h2>
+	        <p>The wonderful modules you can look forward to in the future!</p>
+	    </div>
+	    <div class="row">
+	        <div class="span9">
+	            <div class="module">
+	                <h3>Upcoming Sessions</h3>
+	                <ul class="clearfix">
+                        <li>
+                            <span class="calendarHeader">Lobbying Report Forms</span>
+                            <span class="tip">Description of that the module will be about. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet bibendum magna. Nulla quam ligula, aliquet a ornare vel, venenatis ut nibh.</span>
+                        </li>
+                        <li>
+                            <span class="calendarHeader">Lobbying Report Forms</span>
+                            <span class="tip">Description of that the module will be about. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet bibendum magna. Nulla quam ligula, aliquet a ornare vel, venenatis ut nibh.</span>
+                        </li>
+            	    </ul>
+	            </div>
+	            <div class="module">
+	                <h3>Previous Sessions</h3>
+	                <ul class="clearfix">
+                        <li>
+                            <span class="calendarHeader">Lobbying Report Forms</span>
+                            <span class="tip">Description of that the module will be about. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet bibendum magna. Nulla quam ligula, aliquet a ornare vel, venenatis ut nibh.</span>
+                        </li>
+                        <li>
+                            <span class="calendarHeader">Lobbying Report Forms</span>
+                            <span class="tip">Description of that the module will be about. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet bibendum magna. Nulla quam ligula, aliquet a ornare vel, venenatis ut nibh.</span>
+                        </li>
+            	    </ul>
+	            </div>
+
+        	</div>
+        </div>
+    </div>
+{% endblock %}

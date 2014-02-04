@@ -1,0 +1,150 @@
+{% extends "base-full.html" %}
+
+{% block title %}Account Settings - Sunlight Academy{% endblock %}
+
+{% block content %}
+
+	<div class="row">
+        <div class="span12">
+            <h2>About You</h2>
+        </div>
+		<div class="span8">
+			<form action="." method="post" class="form-horizontal">
+				{% csrf_token %}
+				<fieldset class="module">
+					<legend>Your account</legend>
+					<ul class="pushInward">
+						<li>
+							{{ form.username.errors }}
+							<label for="id_username">Username</label>
+							{{ form.username }}
+						</li>
+						<li>
+							{{ form.first_name.errors }}
+							<label for="id_first_name">First name</label>
+							{{ form.first_name }}
+						</li>
+						<li>
+							{{ form.last_name.errors }}
+							<label for="id_phone">Last name</label>
+							{{ form.last_name }}
+						</li>
+						<li>
+							{{ form.email.errors }}
+							<label for="id_email">Email</label>
+							{{ form.email }}
+						</li>
+						<li>
+							{{ form.phone.errors }}
+							<label for="id_phone">Phone Number</label>
+							{{ form.phone }}
+						</li>
+						<li>
+							{{ form.notify.errors }}
+							<label for="id_notify" class="checkbox asInput tip">{{ form.notify }}Receive email updates from Sunlight Academy</label>
+
+						</li>
+					</ul>
+				</fieldset>
+				<fieldset class="module">
+					<legend>Change your password</legend>
+					<p class="tip">Enter a new password in the field below to change your password</p>
+					<ul class="pushInward">
+						<li>
+							{{ form.new_password.errors }}
+							<label for="id_new_password">New password</label>
+							{{ form.new_password }}
+						</li>
+					</ul>
+				</fieldset>
+				<fieldset class="module">
+					<legend>About you</legend>
+					<p class="tip">The following information will help us in developing future training modules.</p>
+					<ul class="pushInward normalList">
+						<li>
+							{{ form.organization.errors }}
+							<label for="id_organization">Organization</label>
+							{{ form.organization }}
+						</li>
+						<li>
+							{{ form.is_a.errors }}
+							<label for="id_is_a">What best describes your role?</label>
+							{{ form.is_a }}
+						</li>
+						<li>
+							{{ form.interests.errors }}
+							<label for="id_interests">What are your areas of interest?</label>
+							{{ form.interests }}
+						</li>
+					</ul>
+				</fieldset>
+					<input type="submit" value="Update Settings" class="btn btn-sunlight btn-large">
+			</form>
+
+		</div>
+
+		<div class="span4">
+
+			<h3>Associated Accounts</h3>
+			{% if not request.user.has_usable_password %}
+				<div class="alert">
+					<p><strong>Warning!</strong> You do not have a password set for this account. We recommend setting a new password in the form to the left in case your associated accounts become disconnected.</p>
+				</div>
+			{% endif %}
+
+			<p>
+				{% if social_auth.twitter %}
+					<a class="btn btn-warning" href="{% url 'socialauth_disconnect' 'twitter' %}">
+						<i class="icon-remove-circle icon-white"></i>
+						Unlink Twitter
+					</a>
+				{% else %}
+					<a class="btn" href="{% url 'socialauth_associate_begin' 'twitter' %}">
+						<i class="icon-repeat"></i>
+						Link with Twitter
+					</a>
+				{% endif %}
+			</p>
+
+			<p>
+				{% if social_auth.facebook %}
+					<a class="btn btn-warning" href="{% url 'socialauth_disconnect' 'facebook' %}">
+						<i class="icon-remove-circle icon-white"></i>
+						Unlink Facebook
+					</a>
+				{% else %}
+					<a class="btn" href="{% url 'socialauth_associate_begin' 'facebook' %}">
+						<i class="icon-repeat"></i>
+						Link with Facebook
+					</a>
+				{% endif %}
+			</p>
+
+			{% comment %}
+			{% with request.user.completions.all.select_related as completions %}
+				{% if completions %}
+					<h2>Completed Modules</h2>
+					<ul>
+						{% for completion in completions %}
+							<li><a href="{% url 'training_module' completion.module.slug %}">{{ completion.module.title }}</a></li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			{% endwith %}
+			{% endcomment %}
+
+		</div>
+
+	</div>
+
+
+	{% if not request.user.is_staff %}
+		<div class="row">
+			<div class="span12 well delete-account">
+				<p>Permanently delete your account.</p>
+				<p><a href="/account/delete/" class="btn btn-danger"><i class="icon-trash icon-white"></i> Delete Account</a></p>
+			</div>
+		</div>
+	{% endif %}
+
+{% endblock %}

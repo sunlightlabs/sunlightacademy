@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Sunlight Academy{% endblock %}
+
+{% block bodyclass %}index{% endblock %}
+
+{% block header-nav %}
+    <div class="shareables" style="float: right;">
+		<div class="share-buttons module"
+			data-socialite="auto"
+			data-services="linkedin-share,twitter-tweet,facebook-like"
+			data-options="linkBack=http://training.sunlightfoundation.com/&amp;width=90&amp;text=Learn%20about%20%23opengov%20from%20%23sunlightacademy&amp;showCounts=right"
+			data-facebook-like-options="layout=button_count"
+			data-twitter-tweet-options="via=sunfoundation"></div>
+    </div>
+{% endblock %}
+
+{% block container %}
+    {{ block.super }}
+	<div class="row">
+		<div class="span9">
+		    <div class="feature">
+                <p class="first"><span class="standOut">Welcome to Sunlight Academy,</span> a collection of interactive tutorials for journalists, activists, researchers and students to learn about tools by the <a href="http://sunlightfoundation.com">Sunlight Foundation</a> and others to unlock government data.</p>
+                <p>Be sure to create a profile to access our curriculum, track your progress, watch videos, complete training activities and get updates on new tutorials and tools.</p>
+                <p>Whether you are an investigative journalist trying to get insight on a complex data set, an activist uncovering the hidden influence behind your issue, or a congressional staffer in need of mastering legislative data, Sunlight Academy guides you through how to make our tools work for you. Let’s get started!</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="span3">
+            <h2 id="signin-banner" class="textReplace withTip">Sign In</h2>
+            <ul class="signin-buttons clearfix">
+                <li><a class="signinBtn" href="{% url 'socialauth_begin' 'facebook' %}" id="fbBtn">Sign in with Facebook</a></li>
+                <li><a class="signinBtn" href="{% url 'socialauth_begin' 'twitter' %}" id="tweetBtn">Sign in with Twitter</a></li>
+                <li class="userpass">Don't have a facebook or twitter account? <a href="/account/login/">Sign in here instead!</a></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="row">
+        <div class="offset1 span11 ">
+            <h3 class="carouselTitle withTip">Our Modules Include</h3>
+            <div id="carouselBlock" class="carousel" data-autoadvance="">
+                <a class="carousel-previous carouselBtn textReplace" id="ltArrow" href="#">Previous</a>
+                <ul>
+                    <li>
+                        <a href="http://training.sunlightfoundation.com/module/lobbying-contribution-report/"><img src="{% static "img/img_lobbyingReports.jpg" %}"/></a>
+                        <div class="description">
+                            <h4><a href="http://training.sunlightfoundation.com/module/lobbying-contribution-report/">Lobbying Contribution Report</a></h4>
+                            <p>Four times a year, groups that lobby Congress and the federal government file reports on their activities. Unlock the important information contained in the quarterly lobbying reports to keep track of who's influencing whom in Washington. Learn tips on how to read the reports and how they can inform your reporting.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="http://training.sunlightfoundation.com/module/data-visualizations-google-docs/"><img src="{% static "img/img_dataVis.jpg" %}"/></a>
+                        <div class="description">
+                            <h4><a href="http://training.sunlightfoundation.com/module/data-visualizations-google-docs/">Data Visualizations in Google Docs</a></h4>
+                            <p>While Google is often used for internet searches and maps, it can also help with data visualizations via Google Charts. Learn how to use Google Docs to generate interactive charts in this training.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="http://training.sunlightfoundation.com/module/scout-training/"><img src="{% static "img/img_scout.jpg" %}"/></a>
+                        <div class="description">
+                            <h4><a href="http://training.sunlightfoundation.com/module/scout-training/">Scout</a></h4>
+                            <p>Scout is a legislative and governmental tracking tool from the Sunlight Foundation that alerts you when Congress or your state capitol talks about or takes action on issues you care about. Learn how to search and create alerts on federal and state legislation, regulations and the Congressional Record.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="http://training.sunlightfoundation.com/module/learning-about-datagov/"><img src="{% static "img/img_dataGov.jpg" %}"/></a>
+                        <div class="description">
+                            <h4><a href="http://training.sunlightfoundation.com/module/learning-about-datagov/">Learning about Data.gov</a></h4>
+                            <p>Data.gov seeks to organize all of the U.S. government's data, a daunting and unfinished task. In this module, learn about the powers and limitations of Data.gov, and what other resources to use to fill in Data.gov's gaps.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="http://training.sunlightfoundation.com/module/churnalism/"><img src="{% static "img/img_churnalism.jpg" %}"/></a>
+                        <div class="description">
+                            <h4><a href="http://training.sunlightfoundation.com/module/churnalism/">Churnalism</a></h4>
+                            <p>Discover journalism you can trust with Churnalism, a Sunlight Foundation tool, that matches newspaper articles against a large corpus of press releases to determine if any text has been copied.</p>
+                        </div>
+                    </li>
+                </ul>
+                <a class="textReplace carouselBtn carousel-next" id="rtArrow" href="#">Next</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static "js/jquery.simplecarousel-0.1.js" %}"></script>
+    <script>
+        $(document).ready(function() {
+
+            /* carousel */
+            $('.carousel').carousel({
+                autoAdvance: true,
+                nextElem: $('a.carousel-next'),
+                previousElem: $('a.carousel-previous')
+            });
+
+        });
+    </script>
+{% endblock %}

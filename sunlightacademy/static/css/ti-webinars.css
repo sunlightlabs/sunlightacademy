@@ -1,0 +1,208 @@
+/* Body Styles */
+
+body { color: #444; }
+
+/* Nav Header */
+
+.ti-logo {
+    float: right;
+    width: 215px;
+    height: 55px;
+    margin-top: 55px;
+    background: url('../img/TI_logo.png') center center no-repeat;
+    font-size: 0;
+    color: transparent;
+}
+
+/* Intro to Webinar Series */
+
+.webinar-intro {
+    position: relative;
+    height: 350px;
+    margin-bottom: 50px;
+    font-size: 14px;
+}
+
+.webinar-intro h2 {
+    margin-top: 0;          
+    font-size: 30px;
+    line-height: 110%;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+/* Social Sharing */
+
+.shareables table{
+    position: absolute;
+    bottom: 0;
+}
+.shareables .twitter-share { margin-left: 0px; }
+
+
+/* Email Signup */
+
+.email {
+    padding: 20px;
+    background: #daeff2;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;    
+}  
+
+.email h4 {
+    float: left;
+    margin: 0;
+    margin-top: 5px;
+}
+
+.email form {
+    float: right;
+    margin-bottom: 0;            
+}
+
+.email input {
+    width: 425px;
+    height: 30px;
+    padding-left: 10px;
+    margin-right: 5px;
+    margin-bottom: 0;
+    font-size: 120%;
+}
+
+.email-submitted {
+    float: right;
+    width: 562px;
+    padding: 10px;
+    border-radius: 4px;
+    background: #ffe463;
+    text-align: center;
+}
+
+/* Divider */
+hr {
+    margin: 10px 0 50px;
+    border-top: 1px dashed #ccc;
+}
+/* Webinars List and Content */
+
+.webinar-list {
+}
+
+.webinar {
+    position: relative;
+    min-height: 350px;
+    padding: 25px 20px;
+    background: #fff9d9;
+    font-size: 14px;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.webinar:hover {
+    background: #fff7cc;
+
+    -webkit-transition: background 200ms ease;
+    -moz-transition: background 200ms ease;
+    transition: background 200ms ease;
+}
+
+.webinar h3 {
+    padding: 0;
+    margin: 0 0 15px 0;
+    font-size: 22px;
+    line-height: 125%;
+}
+.webinar h4 {
+    padding: 0;
+    margin: 0 0 15px 0;
+    font-size: 18px;
+    line-height: 100%;
+}
+.datetime {
+    background: none;
+    padding: 0;
+}
+.datetime span {
+    padding: 4px 6px 3px;
+    border-radius: 2px;
+    background: #ffe463;
+    font-family: "franklin-gothic-urw-cond","Helvetica Neue","Helvetica","Arial",sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.webinar-details { margin: 35px 0; min-height: 400px;}
+
+/* Register Buttons Galore */
+
+.btn.btn-webinar,
+.btn.btn-webinar:active,
+.btn.btn-webinar:focus {
+    position: absolute;
+    bottom: 25px;
+    width: 260px;
+    padding: 10px 0 7px;
+
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 2px;
+    box-shadow: none;
+    
+    background: #76d5e3;
+    
+    font-family: "adrianna-condensed","Helvetica Neue","Helvetica","Arial",sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    text-shadow: none;
+    text-transform: uppercase;
+    color: #fff;
+    
+    -webkit-transition: background 200ms ease;
+    -moz-transition: background 200ms ease;
+    transition: background 200ms ease;
+}
+.btn.btn-webinar:hover {
+    background: #6dc4d1;
+    color: #fff;    
+    
+    -webkit-transition: background 200ms ease;
+    -moz-transition: background 200ms ease;
+    transition: background 200ms ease;
+}
+.btn.btn-webinar:active {
+    border: 1px solid rgba(0,0,0,0.3);
+    background: #76d5e3;
+    
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
+}
+
+/* Email Button Variation  */
+
+.btn.btn-webinar.btn-email,
+.btn.btn-webinar.btn-email,
+.btn.btn-webinar.btn-email {
+    position: relative;
+    bottom: 0;
+    width: 130px;
+}
+
+/* Archived/New Webinars and Buttons */
+
+.new.webinar,
+.archived.webinar { background: #faf9f5; }
+
+.new .btn.btn-webinar,
+.archived .btn.btn-webinar {
+    background: #fff;
+    color: #999;
+}       
+.new .btn.btn-webinar { cursor: default;}
+.archived .btn.btn-webinar:hover { background: #eee; }      
+.archived .btn.btn-webinar:active { background: #fff; }  
+
+.new .datetime span,
+.archived .datetime span { background: #e5e5e5; }  

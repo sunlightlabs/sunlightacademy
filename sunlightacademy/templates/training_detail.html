@@ -1,0 +1,50 @@
+{% extends "base-full.html" %}
+{% load markup %}
+{% load staticfiles %}
+
+{% block og %}
+    <meta property="og:title" content="{{ training.title }}">
+    <meta property="og:description" content="{{ training.description|markdown|striptags }}">
+    <meta property="og:url" content="http://training.sunlightfoundation.com{% url 'training_detail' training.slug %}">
+{% endblock %}
+
+{% block title %}{{ training.title }} - Sunlight Academy{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="span9">
+            <h2 class="withTip">{{ training.title }}</h2>
+            <div class="meta">
+                <p class="tip">
+                    {{ training.date }} starting at {{ training.start_time }}
+                    {% if training.end_time %}
+                        to {{ training.end_time }}
+                    {% endif %}
+                    eastern
+                    {% if training.category %}
+                        | {{ training.category }}
+                    {% endif %}
+                </p>
+                {% if training.url and training.is_future %}
+                    <p><a href="{{ training.url }}" class="btn btn-sunlight">Register now</a></p>
+                {% endif %}
+            </div>
+            <div class="summary" style="margin-top: 2em;">
+                {{ training.description|markdown }}
+            </div>
+            {% if training.module %}
+                <p><a href="{% url 'training_module' training.module.slug %}" class="btn btn-sunlight">View Archived Webinar &raquo;</a></p>
+            {% endif %}
+        </div>
+        <div class="span3">
+        	<h3>Share this event with friends and colleagues</h3>
+        	<div class="share-buttons module"
+				data-socialite="auto"
+				data-layout="vertical"
+				data-services="linkedin-share,twitter-tweet,facebook-like"
+				data-options="linkBack=http://training.sunlightfoundation.com{% url 'training_detail' training.slug %}&amp;width=90&amp;text=Learn%20about%20{{ training.title|urlencode }}%20from%20%23sunlightacademy&amp;showCounts=right"
+				data-facebook-like-options="layout=button_count"
+				data-twitter-tweet-options="via=sunfoundation"></div>
+        </div>
+    </div>
+{% endblock %}

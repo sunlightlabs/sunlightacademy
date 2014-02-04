@@ -1,0 +1,69 @@
+{% extends "base-full.html" %}
+{% load staticfiles %}
+
+{% block title %}Sunlight Academy{% endblock %}
+
+{% block content %}
+
+	<div class="shareables" style="float: right;">
+		<div class="share-buttons module"
+			data-socialite="auto"
+			data-services="linkedin-share,twitter-tweet,facebook-like"
+			data-options="linkBack=http://training.sunlightfoundation.com/&amp;width=90&amp;text=Learn%20about%20%23opengov%20from%20%23sunlightacademy&amp;showCounts=right"
+			data-facebook-like-options="layout=button_count"
+			data-twitter-tweet-options="via=sunfoundation"></div>
+    </div>
+
+    <div class="module">
+	    <h2 class="withTip">Training Modules</h2>
+	    <p class="tip">Discover All Our Courses Below</p>
+    </div>
+    <div class="row">
+    	{% for category in categories %}
+    		{% with category.public_modules as modules %}
+    			{% if modules %}
+			    	<div class="span12 module {% cycle 'clear' 'noclear' %}">
+						<h4 class="catHeader">
+							<a href="{% url 'training_category' category.slug %}">
+								{{ category.name }}
+							</a>
+						</h4>
+					    <ul class="trainings unstyled clearfix">
+					    	{% for module in modules %}
+								<li>
+									{% if module.pk in completed_ids %}
+										<span class="status accomplished">Accomplished</span>
+									{% else %}
+										<span class="status">Watch</span>
+									{% endif %}
+						            <a href="{% url 'training_module' module.slug %}">
+										{% if module.thumbnail %}
+						            		<img src="{{ module.thumbnail.url }}">
+						            	{% else %}
+						            		<img src="{% static "img/testVideo.jpg" %}">
+						            	{% endif %}
+						            </a>
+						            <div class="description">
+						                <div class="clearfix"></div>
+						                <h4 title="Legislative Data" class="withTip"><a href="{% url 'training_module' module.slug %}">{{ module.title }}</a></h4>
+						                <!-- Date Placeholder -->
+						                {% if module.date %}
+						                	<span class="datetime">{{ module.date.date }}</span>
+						                {% endif %}
+						                <p class="tip">{{ module.description }}</p>
+						            </div>
+								</li>
+							{% endfor %}
+					    </ul>
+					    {% comment %}<a class="viewMore" href="#">Browse All »</a>{% endcomment %}
+					</div>
+				{% endif %}
+			{% endwith %}
+		{% endfor %}
+	</div>
+
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+{% endblock %}
