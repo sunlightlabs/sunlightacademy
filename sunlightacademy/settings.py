@@ -4,7 +4,7 @@ import os
 
 PWD = os.path.abspath(os.path.dirname(__file__))
 
-DEBUG = os.environ.get('DEBUG')
+DEBUG = os.environ.get('DEBUG') == 'True'
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
