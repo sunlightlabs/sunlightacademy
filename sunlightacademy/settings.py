@@ -223,6 +223,6 @@ AWS_LOCATION = os.environ.get('AWS_LOCATION')
 
 SENTRY_DSN = os.environ.get('SENTRY_DSN')
 
-if !DEBUG and SENTRY_DSN:
+if not DEBUG and SENTRY_DSN:
     RAVEN_CONFIG = {'dsn': SENTRY_DSN}
     INSTALLED_APPS = INSTALLED_APPS + ('raven.contrib.django.raven_compat',)
