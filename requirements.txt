@@ -15,6 +15,7 @@ oauth2==1.5.211
 psycopg2==2.5.1
 python-openid==2.2.5
 -e git://github.com/themartorana/python-postmark.git@1c2838642218409675316ef44c1c02e1a70fe55f#egg=python_postmark-master
+raven==4.0.4
 -e git://github.com/sunlightlabs/sfapp.git@469588b1457f2758e1fd3a191f9d3c867cbe265b#egg=sfapp-dev
 sqlparse==0.1.10
 unicodecsv==0.9.4
