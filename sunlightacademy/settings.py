@@ -75,6 +75,8 @@ MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
 ROOT_URLCONF = 'sunlightacademy.urls'
 
 WSGI_APPLICATION = 'sunlightacademy.wsgi.application'
