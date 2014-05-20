@@ -24,7 +24,7 @@ body { color: #444; }
 }
 
 .webinar-intro h2 {
-    margin-top: 0;          
+    margin-top: 0;
     font-size: 30px;
     line-height: 110%;
     font-weight: 400;
@@ -48,8 +48,8 @@ body { color: #444; }
 
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    box-sizing: border-box;    
-}  
+    box-sizing: border-box;
+}
 
 .email h4 {
     float: left;
@@ -59,7 +59,7 @@ body { color: #444; }
 
 .email form {
     float: right;
-    margin-bottom: 0;            
+    margin-bottom: 0;
 }
 
 .email input {
@@ -93,7 +93,7 @@ hr {
 .webinar {
     position: relative;
     min-height: 350px;
-    padding: 25px 20px;
+    padding: 15px 20px;
     background: #fff9d9;
     font-size: 14px;
 
@@ -134,39 +134,39 @@ hr {
     text-transform: uppercase;
 }
 
-.webinar-details { margin: 35px 0; min-height: 400px;}
+.webinar-details { margin: 35px 0; min-height: 375px;}
 
 /* Register Buttons Galore */
 
 .btn.btn-webinar,
 .btn.btn-webinar:active,
 .btn.btn-webinar:focus {
-    position: absolute;
-    bottom: 25px;
+    position: relative;
     width: 260px;
     padding: 10px 0 7px;
+    margin-bottom: 10px;
 
     border: 1px solid rgba(0,0,0,0.15);
     border-radius: 2px;
     box-shadow: none;
-    
+
     background: #76d5e3;
-    
+
     font-family: "adrianna-condensed","Helvetica Neue","Helvetica","Arial",sans-serif;
     font-size: 18px;
     font-weight: 300;
     text-shadow: none;
     text-transform: uppercase;
     color: #fff;
-    
+
     -webkit-transition: background 200ms ease;
     -moz-transition: background 200ms ease;
     transition: background 200ms ease;
 }
 .btn.btn-webinar:hover {
     background: #6dc4d1;
-    color: #fff;    
-    
+    color: #fff;
+
     -webkit-transition: background 200ms ease;
     -moz-transition: background 200ms ease;
     transition: background 200ms ease;
@@ -174,7 +174,7 @@ hr {
 .btn.btn-webinar:active {
     border: 1px solid rgba(0,0,0,0.3);
     background: #76d5e3;
-    
+
     -webkit-transition: none;
     -moz-transition: none;
     transition: none;
@@ -199,10 +199,10 @@ hr {
 .archived .btn.btn-webinar {
     background: #fff;
     color: #999;
-}       
+}
 .new .btn.btn-webinar { cursor: default;}
-.archived .btn.btn-webinar:hover { background: #eee; }      
-.archived .btn.btn-webinar:active { background: #fff; }  
+.archived .btn.btn-webinar:hover { background: #eee; }
+.archived .btn.btn-webinar:active { background: #fff; }
 
 .new .datetime span,
-.archived .datetime span { background: #e5e5e5; }  
+.archived .datetime span { background: #e5e5e5; }
