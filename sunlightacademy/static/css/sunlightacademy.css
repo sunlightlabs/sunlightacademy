@@ -27,6 +27,8 @@ fieldset ul { padding-top: 2em; }
 #main-header .social .youtube a { background: url(../img/social_sprites.png) left -137px no-repeat;}
 #main-header .social .youtube a:hover { background: url(../img/social_sprites.png) left -86px no-repeat;}
 
+.nav { margin: 20px 0; }
+
 .feature { margin-left: 85px; width: 565px; }
 .feature p { font-size: 125%; line-height: 25px; }
 
