@@ -11,6 +11,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template.loader import render_to_string
 from django.views.generic import DetailView
+from registration import signals
 from registration.models import RegistrationProfile
 from registration.views import RegistrationView
 import unicodecsv
