@@ -172,27 +172,26 @@ def training_detail(request, slug):
 
 class RegisterPlusView(RegistrationView):
 
-    def form_valid(self, request, form):
+    form_class = UniqueEmailRegistrationForm
+    success_url = '/account/register/complete/'
 
-        resp = super(RegisterPlusView, self).form_valid(request, form)
+    def register(self, request, **cleaned_data):
 
         try:
-            user = User.objects.get(username=form.cleaned_data['username'])
+            user = User.objects.get(username=cleaned_data['username'])
             user.get_profile()
         except User.DoesNotExist:
             pass
         except Profile.DoesNotExist:
             profile = Profile(
                 user=user,
-                phone=form.cleaned_data.get('phone', ''),
-                organization=form.cleaned_data.get('organization', ''),
-                is_a=form.cleaned_data.get('is_a', ''),
-                interests=form.cleaned_data.get('interests', ''),
-                notify=form.cleaned_data.get('notify'),
+                phone=cleaned_data.get('phone', ''),
+                organization=cleaned_data.get('organization', ''),
+                is_a=cleaned_data.get('is_a', ''),
+                interests=cleaned_data.get('interests', ''),
+                notify=cleaned_data.get('notify'),
             )
             profile.save()
-
-        return resp
 
 
 def account(request):
