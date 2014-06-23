@@ -1,6 +1,6 @@
-Django==1.6.1
+Django==1.6.5
 Markdown==2.3.1
-Pillow==2.2.1
+Pillow==2.4.0
 South==0.8.4
 boto==2.17.0
 dj-database-url==0.2.2
