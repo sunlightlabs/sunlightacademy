@@ -188,6 +188,10 @@ class RegisterPlusView(RegistrationView):
 
         user = RegistrationProfile.objects.create_inactive_user(username, email,
                                                                 password, site)
+        user.first_name = cleaned_data.get('first_name')
+        user.last_name = cleaned_data.get('last_name')
+        user.save()
+
         signals.user_registered.send(sender=self.__class__,
                                      user=user,
                                      request=request)
