@@ -4,12 +4,14 @@ import datetime
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.views import logout
+from django.contrib.sites.models import RequestSite, Site
 from django.core.mail import send_mail
 from django.db.models import Count
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template.loader import render_to_string
 from django.views.generic import DetailView
+from registration.models import RegistrationProfile
 from registration.views import RegistrationView
 import unicodecsv
 
@@ -177,11 +179,20 @@ class RegisterPlusView(RegistrationView):
 
     def register(self, request, **cleaned_data):
 
+        username, email, password = cleaned_data['username'], cleaned_data['email'], cleaned_data['password1']
+        if Site._meta.installed:
+            site = Site.objects.get_current()
+        else:
+            site = RequestSite(request)
+
+        user = RegistrationProfile.objects.create_inactive_user(username, email,
+                                                                password, site)
+        signals.user_registered.send(sender=self.__class__,
+                                     user=user,
+                                     request=request)
+
         try:
-            user = User.objects.get(username=cleaned_data['username'])
             user.get_profile()
-        except User.DoesNotExist:
-            pass
         except Profile.DoesNotExist:
             profile = Profile(
                 user=user,
@@ -192,6 +203,8 @@ class RegisterPlusView(RegistrationView):
                 notify=cleaned_data.get('notify'),
             )
             profile.save()
+
+        return user
 
 
 def account(request):
