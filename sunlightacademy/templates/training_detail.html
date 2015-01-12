@@ -22,6 +22,8 @@
                             to {{ training.end_time }}
                         {% endif %}
                         eastern
+                    {% else %}
+                        multiple dates and locations
                     {% endif %}
                     {% if training.category %}
                         | {{ training.category }}
