@@ -16,11 +16,13 @@
             <h2 class="withTip">{{ training.title }}</h2>
             <div class="meta">
                 <p class="tip">
-                    {{ training.date }} starting at {{ training.start_time }}
-                    {% if training.end_time %}
-                        to {{ training.end_time }}
+                    {% if training.pk != 22 %}
+                        {{ training.date }} starting at {{ training.start_time }}
+                        {% if training.end_time %}
+                            to {{ training.end_time }}
+                        {% endif %}
+                        eastern
                     {% endif %}
-                    eastern
                     {% if training.category %}
                         | {{ training.category }}
                     {% endif %}
